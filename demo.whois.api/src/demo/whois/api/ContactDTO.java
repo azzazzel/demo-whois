@@ -1,4 +1,4 @@
-package demo.whois.application;
+package demo.whois.api;
 
 import org.osgi.dto.DTO;
 

@@ -3,24 +3,29 @@ package demo.whois.application;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.net.URI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.net.whois.WhoisClient;
 import org.osgi.service.component.annotations.Component;
 
+import demo.whois.api.ContactDTO;
+import demo.whois.api.SiteInfoDTO;
+import demo.whois.api.WhoisService;
 
-@Component(service=WhoisService.class)
-public class WhoisService {
+
+@Component
+public class DefaultWhoisService implements WhoisService {
 
 	private static final Pattern WHOIS_SERVER_PATTERN = Pattern.compile("Whois Server:\\s(.*)");
 	private WhoisClient whois = new WhoisClient();
 
-	public SiteInfoDTO check(String domain) {
-		return check(WhoisClient.DEFAULT_HOST, domain);
+	public SiteInfoDTO getSiteInfo(URI domain) {
+		return getSiteInfo(WhoisClient.DEFAULT_HOST, domain);
 	}
 
-	public SiteInfoDTO check(String whoisServer, String domain) {
+	public SiteInfoDTO getSiteInfo(String whoisServer, URI domain) {
 
 		whois.setConnectTimeout(3000);
 		whois.setDefaultTimeout(3000);
@@ -33,7 +38,7 @@ public class WhoisService {
 			}
 
 			whois.connect(whoisServer);
-			String whoisData = whois.query(prefix + domain);
+			String whoisData = whois.query(prefix + domain.getHost());
 			whois.disconnect();
 
 			Matcher matcher = WHOIS_SERVER_PATTERN.matcher(whoisData);
@@ -54,7 +59,7 @@ public class WhoisService {
 				}
 				return result;
 			} else {
-				return check(foundWhoisHost, domain);
+				return getSiteInfo(foundWhoisHost, domain);
 			}
 
 		} catch (IOException e) {

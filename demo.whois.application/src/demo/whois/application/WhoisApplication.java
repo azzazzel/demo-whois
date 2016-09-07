@@ -1,8 +1,13 @@
 package demo.whois.application;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import demo.whois.api.SiteInfoDTO;
+import demo.whois.api.WhoisService;
 import osgi.enroute.configurer.api.RequireConfigurerExtender;
 import osgi.enroute.google.angular.capabilities.RequireAngularWebResource;
 import osgi.enroute.rest.api.REST;
@@ -18,9 +23,11 @@ public class WhoisApplication implements REST {
 	
 	@Reference
 	WhoisService service;
-	
-	public SiteInfoDTO getWhois(String string) {
-		return service.check(string);
+
+	public SiteInfoDTO getWhois(String string) throws URISyntaxException {
+		
+		URI uri = new URI(null, string, null, null);
+		return service.getSiteInfo(uri);
 	}
 
 }

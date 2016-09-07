@@ -24,7 +24,8 @@ JPM-Command:			whois
 
 -buildpath: \
 	osgi.enroute.base.api,\
-	org.apache.commons.net
+	org.apache.commons.net,\
+	demo.whois.api;version=latest
 	
 -testpath: \
 	osgi.enroute.junit.wrapper;version=4.12
