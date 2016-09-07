@@ -1,43 +1,27 @@
 'use strict';
 
-(function() {
 
-	var MODULE = angular.module('demo.whois',
-			[ 'ngRoute', 'ngResource' ]);
+var whois = angular.module('demo.whois', ['ngResource']);
 
-	MODULE.config( function($routeProvider) {
-		$routeProvider.when('/', { controller: mainProvider, templateUrl: '/demo.whois/main/htm/home.htm'});
-		$routeProvider.when('/about', { templateUrl: '/demo.whois/main/htm/about.htm'});
-		$routeProvider.otherwise('/');
-	});
-	
-	MODULE.run( function($rootScope, $location) {
-		$rootScope.alerts = [];
-		$rootScope.closeAlert = function(index) {
-			$rootScope.alerts.splice(index, 1);
-		};
-		$rootScope.page = function() {
-			return $location.path();
-		}
-	});
-	
-	
-	
-	var mainProvider = function($scope, $http) {
-		
-		$scope.upper = function() {
-			var name = prompt("Under what name?");
-			if ( name ) {
-				$http.get('/rest/upper/'+name).then(
-						function(d) {
-							$scope.alerts.push( { type: 'success', msg: d.data });
-						}, function(d) {
-							$scope.alerts.push( { type: 'danger', msg: 'Failed with ['+ d.status + '] '+ d.statusText });
-						}
-				);
+whois.controller('MainController', function MainController($scope, $http) {
+
+	$scope.checkSite = function() {
+		$scope.site = null;
+		$scope.error = undefined
+		$scope.loading = true
+		$http.get('/rest/whois/' + $scope.domain).then(
+		function(response) {
+			$scope.loading = false
+			if (response.data == "") {
+				$scope.error = "We couldn't find whois information for " + $scope.domain
+			} else {
+				$scope.site = response.data;
 			}
-		};
-	
-	}
-	
-})();
+		}, 
+		function(response) {
+			$scope.loading = false
+			$scope.error = response.statusText;
+		});
+	};
+});
+
