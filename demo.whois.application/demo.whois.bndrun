@@ -1,0 +1,17 @@
+#
+# DEMO WHOIS APPLICATION RUN SPECIFICATION
+#
+
+
+Bundle-Version:				1.0.0.${tstamp}
+Bundle-SymbolicName:		demo.whois.application.launch
+JPM-Command:					whois
+
+
+-runfw:						org.eclipse.osgi
+
+-runrequires:  \
+	osgi.identity;filter:='(osgi.identity=demo.whois.application)'
+
+-runbundles: \
+	${error;Resolve first}
