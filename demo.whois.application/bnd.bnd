@@ -13,6 +13,9 @@ Bundle-Description: \
 Private-Package:  \
 	demo.whois.application
 
+Export-Package:  \
+	demo.whois.api
+
 EnRoute-Application: 	demo.whois
 JPM-Command:			whois
 
