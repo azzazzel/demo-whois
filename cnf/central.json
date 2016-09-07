@@ -1,0 +1,5 @@
+{
+ "revisionRefs":[{
+  "artifactId":"org.apache.commons.net","baseline":"3.5.0","bsn":"org.apache.commons.net","created":1473261168673,"description":"Apache Commons Net library contains a collection of network utilities and protocol implementations.Supported protocols include: Echo, Finger, FTP, NNTP, NTP, POP3(S), SMTP(S), Telnet, Whois","groupId":"osgi","md5":"67CDD14323977FA71A21D9603B3D59B6","name":"org.apache.commons.net","phase":"MASTER","revision":"342FC284019F590E1308056990FDB24A08F06318","size":303658,"urls":["http://central.maven.org/maven2/commons-net/commons-net/3.5/commons-net-3.5.jar"],"version":"3.5.0"
+ }]
+}
