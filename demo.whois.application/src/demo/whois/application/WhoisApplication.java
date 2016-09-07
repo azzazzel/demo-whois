@@ -1,6 +1,7 @@
 package demo.whois.application;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import osgi.enroute.configurer.api.RequireConfigurerExtender;
 import osgi.enroute.google.angular.capabilities.RequireAngularWebResource;
@@ -14,8 +15,9 @@ import osgi.enroute.webserver.capabilities.RequireWebServerExtender;
 @RequireConfigurerExtender
 @Component(name="demo.whois")
 public class WhoisApplication implements REST {
-
-	WhoisService service = new WhoisService();
+	
+	@Reference
+	WhoisService service;
 	
 	public String getUpper(String string) {
 		return service.check(string);
