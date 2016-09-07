@@ -19,7 +19,7 @@ public class WhoisApplication implements REST {
 	@Reference
 	WhoisService service;
 	
-	public String getUpper(String string) {
+	public SiteInfoDTO getUpper(String string) {
 		return service.check(string);
 	}
 

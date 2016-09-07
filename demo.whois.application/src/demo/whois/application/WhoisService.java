@@ -16,11 +16,11 @@ public class WhoisService {
 	private static final Pattern WHOIS_SERVER_PATTERN = Pattern.compile("Whois Server:\\s(.*)");
 	private WhoisClient whois = new WhoisClient();
 
-	public String check(String domain) {
+	public SiteInfoDTO check(String domain) {
 		return check(WhoisClient.DEFAULT_HOST, domain);
 	}
 
-	public String check(String whoisServer, String domain) {
+	public SiteInfoDTO check(String whoisServer, String domain) {
 
 		whois.setConnectTimeout(3000);
 		whois.setDefaultTimeout(3000);
@@ -43,16 +43,16 @@ public class WhoisService {
 			}
 
 			if (foundWhoisHost == null) {
-				StringBuilder result = new StringBuilder();
+				SiteInfoDTO result = new SiteInfoDTO();
 
 				BufferedReader reader = new BufferedReader(new StringReader(whoisData));
 				String line = null;
 				while ((line = reader.readLine()) != null) {
-					if (line.startsWith("Registrant Organization:")) {
-						result.append(line.trim().substring(line.indexOf(":")+2));
-					}
+					String[] parts = line.split(": ");
+					parseLine("Registrant", result.owner, parts);
+					parseLine("Admin", result.admin, parts);
 				}
-				return result.toString();
+				return result;
 			} else {
 				return check(foundWhoisHost, domain);
 			}
@@ -62,5 +62,16 @@ public class WhoisService {
 		}
 		return null;
 	}
-
+	
+	private void parseLine(String role, ContactDTO dto, String[] parts) {
+		if ((role + " Name").equals(parts[0])) {
+			dto.person = parts.length > 1 ? parts[1] : null;
+		}
+		if ((role + " Organization").equals(parts[0])) {
+			dto.organization = parts.length > 1 ? parts[1] : null;
+		}
+		if ((role + " Phone").equals(parts[0])) {
+			dto.phoneNumber = parts.length > 1 ? parts[1] : null;
+		}
+	}
 }
