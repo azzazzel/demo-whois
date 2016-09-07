@@ -15,8 +15,10 @@ import osgi.enroute.webserver.capabilities.RequireWebServerExtender;
 @Component(name="demo.whois")
 public class WhoisApplication implements REST {
 
+	WhoisService service = new WhoisService();
+	
 	public String getUpper(String string) {
-		return string.toUpperCase();
+		return service.check(string);
 	}
 
 }
