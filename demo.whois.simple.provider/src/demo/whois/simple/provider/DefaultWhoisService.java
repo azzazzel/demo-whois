@@ -1,4 +1,4 @@
-package demo.whois.application;
+package demo.whois.simple.provider;
 
 import java.io.BufferedReader;
 import java.io.IOException;
