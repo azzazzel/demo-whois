@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.net.whois.WhoisClient;
+import org.osgi.framework.Constants;
 import org.osgi.service.component.annotations.Component;
 
 import demo.whois.api.ContactDTO;
@@ -15,7 +16,12 @@ import demo.whois.api.SiteInfoDTO;
 import demo.whois.api.WhoisService;
 
 
-@Component
+@Component (
+		property = {
+				Constants.SERVICE_RANKING + ":Integer = -100"
+		},
+		immediate = true
+	)
 public class DefaultWhoisService implements WhoisService {
 
 	private static final Pattern WHOIS_SERVER_PATTERN = Pattern.compile("Whois Server:\\s(.*)");

@@ -5,6 +5,9 @@ import java.net.URISyntaxException;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
+import org.osgi.service.component.annotations.ReferencePolicy;
+import org.osgi.service.component.annotations.ReferencePolicyOption;
 
 import demo.whois.api.SiteInfoDTO;
 import demo.whois.api.WhoisService;
@@ -21,13 +24,18 @@ import osgi.enroute.webserver.capabilities.RequireWebServerExtender;
 @Component(name="demo.whois")
 public class WhoisApplication implements REST {
 	
-	@Reference
-	WhoisService service;
+	@Reference (
+		policy = ReferencePolicy.DYNAMIC,
+		policyOption = ReferencePolicyOption.GREEDY,
+		cardinality = ReferenceCardinality.MANDATORY
+	)
+	volatile WhoisService service;
 
 	public SiteInfoDTO getWhois(String string) throws URISyntaxException {
 		
 		URI uri = new URI(null, string, null, null);
 		return service.getSiteInfo(uri);
 	}
+	
 
 }

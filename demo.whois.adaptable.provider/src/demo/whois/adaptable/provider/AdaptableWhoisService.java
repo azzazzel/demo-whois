@@ -2,6 +2,7 @@ package demo.whois.adaptable.provider;
 
 import java.net.URI;
 
+import org.osgi.framework.Constants;
 import org.osgi.service.component.annotations.Component;
 
 import demo.whois.api.SiteInfoDTO;
@@ -10,7 +11,12 @@ import demo.whois.api.WhoisService;
 /**
  * 
  */
-@Component
+@Component (
+		property = {
+				Constants.SERVICE_RANKING + ":Integer = 100"
+		},
+		immediate = true
+	)
 public class AdaptableWhoisService implements WhoisService {
 
 	@Override
