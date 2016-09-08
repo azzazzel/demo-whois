@@ -2,7 +2,7 @@
 # DEMO WHOIS APPLICATION APPLICATION
 #
 
-Bundle-Version: 1.0.0.${tstamp}
+Bundle-Version: 1.0.1.${tstamp}
 Bundle-Description: \
 	This is the DEMO WHOIS APPLICATION bundle. It carries the configuration for an application \
 	and provides some basic very much application specific stuff.  It provides a button \

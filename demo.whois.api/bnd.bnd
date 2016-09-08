@@ -2,7 +2,7 @@
 # DEMO WHOIS API
 #
 
-Bundle-Version:1.0.0.${tstamp}
+Bundle-Version: 1.1.0.${tstamp}
 Bundle-Description: 				\
 	This is DEMO WHOIS API project. An API project should in general not contain any \
 	implementation code.\
