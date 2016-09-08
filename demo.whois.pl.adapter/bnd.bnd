@@ -27,3 +27,4 @@ Private-Package: demo.whois.pl.adapter
 	
 -runbundles: \
 	${error;Resolve first}
+Export-Package: demo.whois.adaptable.spi

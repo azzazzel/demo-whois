@@ -28,3 +28,4 @@ Private-Package:  \
 	
 -runbundles: \
 	${error;Resolve first}
+Export-Package: demo.whois.adaptable.spi
