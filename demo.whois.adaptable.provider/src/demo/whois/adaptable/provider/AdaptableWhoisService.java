@@ -17,6 +17,7 @@ public class AdaptableWhoisService implements WhoisService {
 	public SiteInfoDTO getSiteInfo(URI site) {
 		
 		SiteInfoDTO siteInfoDTO = new SiteInfoDTO();
+		siteInfoDTO.dataProvider = "AdaptableWhoisService";
 		siteInfoDTO.admin.person = "Fake data for now";
 		
 		return siteInfoDTO;

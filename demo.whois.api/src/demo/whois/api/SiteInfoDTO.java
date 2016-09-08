@@ -9,5 +9,7 @@ public class SiteInfoDTO extends DTO {
 	public ContactDTO owner = new ContactDTO();
 
 	public ContactDTO admin = new ContactDTO();
+	
+	public String dataProvider;
 		
 }

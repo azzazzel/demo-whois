@@ -49,6 +49,7 @@ public class DefaultWhoisService implements WhoisService {
 
 			if (foundWhoisHost == null) {
 				SiteInfoDTO result = new SiteInfoDTO();
+				result.dataProvider="DefaultWhoisService";
 
 				BufferedReader reader = new BufferedReader(new StringReader(whoisData));
 				String line = null;
