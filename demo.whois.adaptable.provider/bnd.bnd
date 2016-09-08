@@ -15,11 +15,15 @@ Private-Package:  \
 	
 -buildpath: \
 	osgi.enroute.base.api;version=1.0,\
-	demo.whois.api;version=latest
+	org.apache.commons.net,\
+	demo.whois.adaptable.spi;version=latest
 	
 -testpath: \
-	osgi.enroute.junit.wrapper;version=4.12
+	osgi.enroute.junit.wrapper;version=4.12,\
+	osgi.enroute.hamcrest.wrapper
 
 -includeresource: {readme.md}
 
-Export-Package: demo.whois.api
+Export-Package: \
+	demo.whois.api,\
+	demo.whois.adaptable.spi
