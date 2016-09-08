@@ -13,8 +13,6 @@ Bundle-Description: \
 Private-Package:  \
 	demo.whois.application
 
-Export-Package:  \
-	demo.whois.api
 
 EnRoute-Application: 	demo.whois
 JPM-Command:			whois
@@ -27,7 +25,6 @@ JPM-Command:			whois
 
 -buildpath: \
 	osgi.enroute.base.api,\
-	org.apache.commons.net,\
 	demo.whois.api;version=latest
 	
 -testpath: \
